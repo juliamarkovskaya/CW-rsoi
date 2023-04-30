@@ -13,4 +13,14 @@ public class AdminController {
         return "admin/home";
     }
 
+    @GetMapping("/books")
+    public String books() {
+        return "admin/books";
+    }
+
+    @GetMapping("/addNewBook")
+    public String addNewBook() {
+        return "admin/add_book";
+    }
+
 }

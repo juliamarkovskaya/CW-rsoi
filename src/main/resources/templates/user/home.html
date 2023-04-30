@@ -2,17 +2,36 @@
 <html lang="en" xmlns:th="http://www.thymeLeaf.org"
       th:replace="base::Layout(~{::section})">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <title>Profile Page</title>
+
+    <style>
+        body {
+        font-family: 'Libre Baskerville', serif;
+        font-size: 16px;
+        line-height: 1.4;
+    }
+
+        .container-lg {
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 100px;
+        }
+
+    </style>
+
 </head>
 <body>
 
     <section>
+        <div class="container-lg">
         <h1>User after login: home page</h1>
         <a href="/logout">Logout</a>
         <h1>Name : [[${user.firstName}]]</h1>
         <h1>LastName : [[${user.lastName}]]</h1>
         <h1>Email : [[${user.email}]]</h1>
+        </div>
     </section>
 
 </body>

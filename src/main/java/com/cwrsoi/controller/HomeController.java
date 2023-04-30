@@ -5,11 +5,10 @@ import com.cwrsoi.repository.UserRepository;
 import com.cwrsoi.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
@@ -22,6 +21,9 @@ public class HomeController {
 
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @ModelAttribute
     private void userDetails(Model m, Principal p) {
@@ -70,6 +72,7 @@ public class HomeController {
         }
 
         return "redirect:/register";
+        //return "redirect:/signin";
     }
 
     @GetMapping("/loadForgotPassword")
@@ -77,17 +80,47 @@ public class HomeController {
         return "forgot_password";
     }
 
-    @GetMapping("/loadResetPassword")
-    public String loadResetPassword() {
+    @GetMapping("/loadResetPassword/{id}")
+    public String loadResetPassword(@PathVariable int id, Model m) {
+        m.addAttribute("id", id);
         return "reset_password";
     }
 
     @PostMapping("/forgotPassword")
-    public String forgotPassword() {
+    public String forgotPassword(@RequestParam String email,
+                                 @RequestParam String mobileNum, HttpSession session) {
 
+        UserDtls user = userRepo.findByEmailAndAndMobileNumber(email, mobileNum);
 
-        return "";
+        if(user != null) {
+            return "redirect:/loadResetPassword/" + user.getId();
+        } else {
+            session.setAttribute("msg", "invalid email & mobile number");
+            return "forgot_password";
+        }
+
     }
 
+    @PostMapping("/changePassword")
+    public String resetPassword(@RequestParam String psw, @RequestParam Integer id, HttpSession session) {
+
+        UserDtls user = userRepo.findById(id).get();
+
+        String encryptPsw = passwordEncoder.encode(psw);
+        user.setPassword(encryptPsw);
+
+        UserDtls updateUser = userRepo.save(user);
+
+        if(updateUser != null) {
+            session.setAttribute("msg", "Password change successfully");
+        }
+
+        return "redirect:/loadForgotPassword";
+    }
+
+    @GetMapping("/editProfile")
+    public String loadEditProfile() {
+        return "edit_profile";
+    }
 
 }
