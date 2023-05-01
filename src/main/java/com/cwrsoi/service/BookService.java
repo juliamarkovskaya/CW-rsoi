@@ -8,6 +8,8 @@ public interface BookService {
 
     public BookDtls saveBook(BookDtls book);
 
+    //public BookDtls addNewBook(BookDtls book);
+
     public List<BookDtls> getAllBooks();
 
     public BookDtls getBookById(Integer idBook);

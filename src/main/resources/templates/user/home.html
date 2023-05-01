@@ -7,17 +7,20 @@
     <title>Profile Page</title>
 
     <style>
-        body {
+
+        * {
         font-family: 'Libre Baskerville', serif;
         font-size: 16px;
         line-height: 1.4;
     }
 
-        .container-lg {
-            margin: 0 auto;
-            max-width: 800px;
-            padding: 100px;
+        .btn-primary {
+            color: #fff3d6
         }
+        .btn-primary:hover {
+            color: #fff3d6
+        }
+
 
     </style>
 
@@ -25,14 +28,27 @@
 <body>
 
     <section>
-        <div class="container-lg">
-        <h1>User after login: home page</h1>
-        <a href="/logout">Logout</a>
-        <h1>Name : [[${user.firstName}]]</h1>
-        <h1>LastName : [[${user.lastName}]]</h1>
-        <h1>Email : [[${user.email}]]</h1>
-            <h1>Mobile Number : [[${user.mobileNumber}]]</h1>
+
+        <div class="position-relative">
+            <div class="position-absolute top-0 start-50 translate-middle-x">
+
+                <div class="card" style="width: 35rem; margin-top: 10%">
+                    <div class="card-body">
+                        <h3 class="card-title">My Profile</h3>
+                        <h4 class="card-subtitle mb-6 text-muted">User</h4>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Name : [[${user.firstName}]]</li>
+                                <li class="list-group-item">LastName : [[${user.lastName}]]</li>
+                                <li class="list-group-item">Email : [[${user.email}]]</li>
+                                <li class="list-group-item">Mobile Number : [[${user.mobileNumber}]]</li>
+                            </ul>
+                        <a th:href="@{/editProfile}" style="margin: 10px 0" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
     </section>
 
 </body>

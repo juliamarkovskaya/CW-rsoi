@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookRepository extends JpaRepository<BookDtls, Integer> {
 
+    public boolean existsById(Integer idBook);
     //public BookDtls delete(Integer idBook);
 }

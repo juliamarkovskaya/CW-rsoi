@@ -13,6 +13,23 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepo;
 
+    /*@Override
+    public BookDtls saveBook(BookDtls book) {
+        return bookRepo.save(book);
+    }*/
+
+    /*@Override
+    public BookDtls addNewBook(BookDtls book) {
+        //book.setIdBook(book.getIdBook());
+        //BookDtls book = bookRepo.findById(idBook).get();
+        return bookRepo.save(book);
+    }*/
+
+    /*@Override
+    public BookDtls addNewBook(BookDtls book) {
+        return bookRepo.save(book);
+    }*/
+
     @Override
     public BookDtls saveBook(BookDtls book) {
         return bookRepo.save(book);

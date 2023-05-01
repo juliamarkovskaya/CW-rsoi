@@ -6,18 +6,24 @@ import javax.persistence.*;
 
 @Data
 @Entity
-//@Table(name = "book_dtls")
+@Table(name = "book_dtls")
 public class BookDtls {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idBook;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "author")
     private String author;
 
+    @Column(name = "price")
     private Double price;
+
+    //@Lob
+    //private byte[] image;
 
     public int getIdBook() {
         return idBook;
