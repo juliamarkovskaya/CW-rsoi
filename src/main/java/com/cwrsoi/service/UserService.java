@@ -6,6 +6,8 @@ public interface UserService {
 
     public UserDtls createUser(UserDtls user);
 
+    UserDtls editUser(UserDtls user);
+
     public boolean checkEmail(String email);
 
 }

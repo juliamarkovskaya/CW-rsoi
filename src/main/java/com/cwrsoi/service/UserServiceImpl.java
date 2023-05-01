@@ -26,6 +26,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public UserDtls editUser(UserDtls user){
+        user.setFirstName(user.getFirstName());
+        user.setLastName(user.getLastName());
+        user.setMobileNumber(user.getMobileNumber());
+        return userRepo.save(user);
+    }
+
+    @Override
     public boolean checkEmail(String email) {
         return userRepo.existsByEmail(email);
     }

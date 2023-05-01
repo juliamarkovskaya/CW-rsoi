@@ -5,12 +5,15 @@ import com.cwrsoi.repository.UserRepository;
 import com.cwrsoi.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.security.Principal;
 
 @Controller
@@ -118,9 +121,33 @@ public class HomeController {
         return "redirect:/loadForgotPassword";
     }
 
-    @GetMapping("/editProfile")
+    @GetMapping ("/editProfile")
     public String loadEditProfile() {
         return "edit_profile";
     }
+    @PostMapping("/updateProfile")
+    public String editProfile(Model model, Authentication authentication, @RequestParam String firstName, @RequestParam String lastName,
+                              @RequestParam String password, HttpSession session, String email, String mobileNumber) throws IOException {
+        org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        email = auth.getName();
+        UserDtls user = userRepo.findByEmail(email);
+
+        boolean f = passwordEncoder.matches(password, user.getPassword());
+
+        if(f) {
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setMobileNumber(mobileNumber);
+
+            userRepo.save(user);
+            model.addAttribute("user", user);
+            session.setAttribute("msg", "Изменения сохранены.");
+
+        } else {
+            session.setAttribute("msg", "Неверный пароль.");
+        }
+        return "redirect:/editProfile";
+    }
+
 
 }

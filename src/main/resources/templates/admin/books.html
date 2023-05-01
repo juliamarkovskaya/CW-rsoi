@@ -56,6 +56,9 @@
                         <th scope="col">Name</th>
                         <th scope="col">Author</th>
                         <th scope="col">Price</th>
+
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -67,8 +70,8 @@
                         <td th:text="${book.price}"></td>
 
 
-                            <a href="#" class="btn btn-warning"
-                               th:href="@{/admin/}">Update</a>
+                            <td><a href="#" class="btn btn-warning"
+                               th:href="@{/admin/}">Update</a></td>
 
                         <td><a href="" th:href="@{/admin/}"
                                class="btn btn-danger">Delete</a></td>
