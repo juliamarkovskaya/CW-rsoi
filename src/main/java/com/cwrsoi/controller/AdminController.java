@@ -57,38 +57,38 @@ public class AdminController {
         return "redirect:/admin/addBook";
     }
 
-    @GetMapping("/updateBook")
-
-
-    /*@GetMapping("/updateBook")
-    public String loadUpdateBook() {
+    @GetMapping("/updateBook/{idBook}")
+    public String loadUpdateBook(@PathVariable Integer idBook, Model model) {
+        model.addAttribute("book", bookService.getBookById(idBook));
         return "admin/update_book";
     }
 
-    @PostMapping("/bookInfoUpdate")
-    public String updateBook(Model model, Authentication authentication,
-                             @RequestParam String name, @RequestParam String author,
-                             @RequestParam Double price, Integer idBook, HttpSession session) throws IOException {
-        org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    @PostMapping("/bookInfoUpdate/{idBook}")
+    public String updateBook(@PathVariable Integer idBook, @ModelAttribute("book") BookDtls book, Model model){
 
-        BookDtls oldBook = bookRepo.findByIdBook(idBook);
+        BookDtls bookDtls = bookService.getBookById(idBook);
+        bookDtls.setIdBook(idBook);
+        bookDtls.setName(book.getName());
+        bookDtls.setAuthor(book.getAuthor());
+        bookDtls.setPrice(book.getPrice());
 
-        oldBook.setName(name);
-        oldBook.setAuthor(author);
-        oldBook.setPrice(price);
+        bookService.editBook(bookDtls);
 
-        bookRepo.save(oldBook);
-        model.addAttribute("oldBook", oldBook);
-        session.setAttribute("msg", "Изменения сохранены.");
-        return "redirect:/admin/updateBook";
-    }*/
+        return "redirect:/admin/books";
+    }
+
+    @GetMapping("/deleteBook/{idBook}")
+        public String deleteBook(@PathVariable Integer idBook, HttpSession session) {
+            bookService.deleteBook(idBook);
+            session.setAttribute("msg", "Successfully deleted");
+            return "redirect:/admin/books";
+        }
 
 
-
-    @PostMapping("/save")
+    /*@PostMapping("/save")
     public String save(BookDtls book) {
         bookRepo.save(book);
 
         return "redirect:/books";
-    }
+    }*/
 }

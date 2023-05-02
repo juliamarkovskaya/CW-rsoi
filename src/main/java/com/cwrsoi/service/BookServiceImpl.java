@@ -28,20 +28,19 @@ public class BookServiceImpl implements BookService {
         return bookRepo.findById(idBook).get();
     }
 
-    /*@Override
+    @Override
     public BookDtls editBook(BookDtls book) {
-        BookDtls oldBook = bookRepo.findById(idBook);
+        BookDtls bookDtls = bookRepo.findByIdBook(book.getIdBook());
 
-        oldBook.setName(book.getName());
-        oldBook.setAuthor(book.getAuthor());
-        oldBook.setPrice(book.getPrice());
-
-        return bookRepo.save(Book);
-    }*/
+        bookDtls.setName(book.getName());
+        bookDtls.setAuthor(book.getAuthor());
+        bookDtls.setPrice(book.getPrice());
+        return bookRepo.save(book);
+    }
 
     @Override
     public String deleteBook(Integer idBook) {
-        BookDtls book = bookRepo.findById(idBook).get();
+        BookDtls book = bookRepo.getById(idBook);
 
         if(book!=null) {
             bookRepo.delete(book);

@@ -3,6 +3,7 @@ package com.cwrsoi.controller;
 import com.cwrsoi.model.BookDtls;
 import com.cwrsoi.model.UserDtls;
 import com.cwrsoi.repository.UserRepository;
+import com.cwrsoi.service.BookService;
 import com.cwrsoi.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -29,6 +31,9 @@ public class HomeController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    private BookService bookService;
+
     @ModelAttribute
     private void userDetails(Model m, Principal p) {
 
@@ -40,8 +45,10 @@ public class HomeController {
 
     }
 
-    @GetMapping(value = "/")
-    public String index() {
+    @GetMapping("/")
+    public String getAllBooks(Model model) {
+        List<BookDtls> books = bookService.getAllBooks();
+        model.addAttribute("books", books);
         return "index";
     }
 

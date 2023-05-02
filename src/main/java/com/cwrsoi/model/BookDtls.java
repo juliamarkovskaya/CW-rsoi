@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class BookDtls {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue//(strategy = GenerationType.IDENTITY)
     private int idBook;
 
     @Column(name = "name")
@@ -75,4 +75,5 @@ public class BookDtls {
                 ", price=" + price +
                 '}';
     }
+
 }

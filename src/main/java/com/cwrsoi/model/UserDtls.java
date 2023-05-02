@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class UserDtls {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue//(strategy = GenerationType.IDENTITY)
     //private int id;
     private Long id;
     @Column(name="first_name")

@@ -12,7 +12,7 @@ public interface BookService {
 
     public BookDtls getBookById(Integer idBook);
 
-    //public BookDtls editBook(BookDtls book);
+    public BookDtls editBook(BookDtls book);
 
     public String deleteBook(Integer idBook);
 

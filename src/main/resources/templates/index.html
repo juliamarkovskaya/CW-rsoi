@@ -12,14 +12,40 @@
     <section>
         <h1>index</h1>
 
-        <div class="card" style="width: 18rem;">
+        <div class="row">
+            <div class="col-md-6" th:each="book : ${books}">
+                <div class="card mb-3">
+                    <!-- <img th:src="${book.image}" class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                        <h3 class="card-title">[[${book.name}]]</h3>
+                        <p class="card-text">[[${book.author}]]</p>
+                        <p class="card-text">[[${book.price}]]</p>
+
+                        <th:block th:if="${user==NULL}">
+                            <ul>
+                                <a href="signin" class="btn btn-primary">Add to bag</a>
+                            </ul>
+                        </th:block>
+
+                        <th:block th:if="${user!=NULL}">
+                            <ul>
+                                <a th:href="@{/user/bag/{idBook}(idBook=${book.idBook})}" class="btn btn-primary">Add to bag</a>
+                            </ul>
+                        </th:block>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <!-- <div class="card" style="width: 18rem;">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"></h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
-        </div>
+        </div> -->
 
     </section>
 

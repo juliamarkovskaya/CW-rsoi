@@ -1,4 +1,4 @@
-/*package com.cwrsoi.controller;
+package com.cwrsoi.controller;
 
 import com.cwrsoi.model.BookDtls;
 import com.cwrsoi.repository.BookRepository;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller @RequestMapping({"/admin/books", "/admin/add_book"})
+@Controller
 @RequiredArgsConstructor
 public class BookController {
 
@@ -22,19 +22,6 @@ public class BookController {
     private BookService bookService;
 
 
-    /*@PostMapping("/save")
-    public String save(BookDtls book) {
-        bookRepo.save(book);
 
-        return "redirect:/books";
-    }*/
+}
 
-
-    /*@GetMapping("/delete")
-    public String deleteBook(BookDtls book) {
-        bookRepo.delete(book);
-
-        return "redirect:/books";
-    }*/
-
-//}

@@ -1,7 +1,9 @@
 package com.cwrsoi.controller;
 
+import com.cwrsoi.model.BookDtls;
 import com.cwrsoi.model.UserDtls;
 import com.cwrsoi.repository.UserRepository;
+import com.cwrsoi.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    private BookService bookService;
+
     @ModelAttribute
     private void userDetails(Model m, Principal p) {
         String email=p.getName();
@@ -31,6 +36,16 @@ public class UserController {
     @GetMapping("/")
     public String home() {
         return "user/home";
+    }
+
+    @GetMapping("/bag")
+    public String bag() {
+        return "user/bag";
+    }
+    @GetMapping("/bag/{idBook}")
+    public String addToBag(@PathVariable Integer idBook, Model model) {
+        //BookDtls book = bookService.getBookById()
+        return "user/bag";
     }
 
     @GetMapping("/changePass")
