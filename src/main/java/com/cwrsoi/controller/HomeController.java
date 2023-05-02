@@ -1,5 +1,6 @@
 package com.cwrsoi.controller;
 
+import com.cwrsoi.model.BookDtls;
 import com.cwrsoi.model.UserDtls;
 import com.cwrsoi.repository.UserRepository;
 import com.cwrsoi.service.UserService;

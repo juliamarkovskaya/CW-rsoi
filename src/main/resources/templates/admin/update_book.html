@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container p-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header text-center fs-4">Update Book</div>
+                <th:block th:if="${session.msg}">
+                    <p class="text-center fs-4 text-success">[[${session.msg}]]</p>
+                    <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+                </th:block>
+                <div class=card-body"">
+                    <form action="bookInfoUpdate" method="post">
+                        <div class="mb-3">
+                            <label>Name</label>
+                            <input type="text" name="name" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>Author</label>
+                            <input type="text" name="author" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>Price</label>
+                            <input type="text" name="price" class="form-control">
+                        </div>
+                        <button class="btn btn-primary col-md-12">Confirm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

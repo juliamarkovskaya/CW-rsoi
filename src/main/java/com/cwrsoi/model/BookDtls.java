@@ -22,8 +22,8 @@ public class BookDtls {
     @Column(name = "price")
     private Double price;
 
-    //@Lob
-    //private byte[] image;
+    @Lob
+    private byte[] image;
 
     public int getIdBook() {
         return idBook;

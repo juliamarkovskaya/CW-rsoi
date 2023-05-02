@@ -4,14 +4,15 @@ import com.cwrsoi.model.BookDtls;
 import com.cwrsoi.repository.BookRepository;
 import com.cwrsoi.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.awt.print.Book;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -45,26 +46,44 @@ public class AdminController {
     }
 
     @PostMapping("/saveNew")
-    public String saveBook(@ModelAttribute("book") BookDtls book) {
-        BookDtls bookDtls = bookService.saveBook(book);
-        if(bookDtls != null) {
+    public String saveBook(@ModelAttribute("book") BookDtls book, HttpSession session) {
+        BookDtls newbook = bookService.saveBook(book);
+        if(newbook != null) {
+            session.setAttribute("msg", "Book added successfully");
             System.out.println("success");
         } else {
-            System.out.println("не записало???");
+            session.setAttribute("msg", "Something wrong");
         }
         return "redirect:/admin/addBook";
     }
 
-    /*@PostMapping("/addNewBook")
-    public String addnewbook(@ModelAttribute BookDtls book) {
-        BookDtls bookDtls = bookService.addNewBook(book);
-        if(bookDtls != null) {
-            System.out.println("success");
-        } else {
-            System.out.println("не записало???");
-        }
-        return "redirect:admin/books";
+    @GetMapping("/updateBook")
+
+
+    /*@GetMapping("/updateBook")
+    public String loadUpdateBook() {
+        return "admin/update_book";
+    }
+
+    @PostMapping("/bookInfoUpdate")
+    public String updateBook(Model model, Authentication authentication,
+                             @RequestParam String name, @RequestParam String author,
+                             @RequestParam Double price, Integer idBook, HttpSession session) throws IOException {
+        org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        BookDtls oldBook = bookRepo.findByIdBook(idBook);
+
+        oldBook.setName(name);
+        oldBook.setAuthor(author);
+        oldBook.setPrice(price);
+
+        bookRepo.save(oldBook);
+        model.addAttribute("oldBook", oldBook);
+        session.setAttribute("msg", "Изменения сохранены.");
+        return "redirect:/admin/updateBook";
     }*/
+
+
 
     @PostMapping("/save")
     public String save(BookDtls book) {

@@ -9,4 +9,6 @@ public interface BookRepository extends JpaRepository<BookDtls, Integer> {
 
     public boolean existsById(Integer idBook);
     //public BookDtls delete(Integer idBook);
+
+    public BookDtls findByIdBook (Integer idBook);
 }

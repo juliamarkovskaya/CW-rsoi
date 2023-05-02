@@ -13,23 +13,6 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepo;
 
-    /*@Override
-    public BookDtls saveBook(BookDtls book) {
-        return bookRepo.save(book);
-    }*/
-
-    /*@Override
-    public BookDtls addNewBook(BookDtls book) {
-        //book.setIdBook(book.getIdBook());
-        //BookDtls book = bookRepo.findById(idBook).get();
-        return bookRepo.save(book);
-    }*/
-
-    /*@Override
-    public BookDtls addNewBook(BookDtls book) {
-        return bookRepo.save(book);
-    }*/
-
     @Override
     public BookDtls saveBook(BookDtls book) {
         return bookRepo.save(book);
@@ -45,6 +28,17 @@ public class BookServiceImpl implements BookService {
         return bookRepo.findById(idBook).get();
     }
 
+    /*@Override
+    public BookDtls editBook(BookDtls book) {
+        BookDtls oldBook = bookRepo.findById(idBook);
+
+        oldBook.setName(book.getName());
+        oldBook.setAuthor(book.getAuthor());
+        oldBook.setPrice(book.getPrice());
+
+        return bookRepo.save(Book);
+    }*/
+
     @Override
     public String deleteBook(Integer idBook) {
         BookDtls book = bookRepo.findById(idBook).get();
@@ -56,14 +50,4 @@ public class BookServiceImpl implements BookService {
         return "Something wrong";
     }
 
-    @Override
-    public BookDtls editBook(BookDtls book, Integer idBook) {
-        BookDtls oldBook = bookRepo.findById(idBook).get();
-
-        oldBook.setName(book.getName());
-        oldBook.setAuthor(book.getAuthor());
-        oldBook.setPrice(book.getPrice());
-
-        return bookRepo.save(oldBook);
-    }
 }

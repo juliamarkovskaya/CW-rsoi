@@ -1,4 +1,4 @@
-package com.cwrsoi.controller;
+/*package com.cwrsoi.controller;
 
 import com.cwrsoi.model.BookDtls;
 import com.cwrsoi.repository.BookRepository;
@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-//@RequestMapping({"/admin/books", "/admin/add_book"})
+@Controller @RequestMapping({"/admin/books", "/admin/add_book"})
 @RequiredArgsConstructor
 public class BookController {
 
@@ -38,4 +37,4 @@ public class BookController {
         return "redirect:/books";
     }*/
 
-}
+//}
