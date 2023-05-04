@@ -20,21 +20,21 @@
                         <form action="updateProfile" method="post">
                             <div class="mb-3">
                                 <label>Имя</label>
-                                <input type="text" name="firstName" class="form-control" th:value="${user.getFirstName()}">
+                                <input type="text" name="firstName" required pattern="[A-Za-zА-Яа-яёЁ]{2,}" class="form-control" th:value="${user.getFirstName()}">
                             </div>
                             <div class="mb-3">
                                 <label>Фамилия</label>
-                                <input type="text" name="lastName" class="form-control" th:value="${user.getLastName()}">
+                                <input type="text" name="lastName" required pattern="[A-Za-zА-Яа-яёЁ]{2,}" class="form-control" th:value="${user.getLastName()}">
                             </div>
                             <div class="mb-3">
                                 <label>Номер телефона</label>
-                                <input type="text" name="mobileNumber" class="form-control" th:value="${user.getMobileNumber()}">
+                                <input type="tel" name="mobileNumber" required pattern="^\+?\d{12,13}$" class="form-control" th:value="${user.getMobileNumber()}">
                             </div>
                             <div class="mb-3">
                                 <label>Введите пароль для подтверждения</label>
                                 <input type="password" name="password" class="form-control">
                             </div>
-                            <button class="btn btn-primary col-md-12">Confirm</button>
+                            <button class="btn btn-dark col-md-12">Confirm</button>
                         </form>
                     </div>
                 </div>

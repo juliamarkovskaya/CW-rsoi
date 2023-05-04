@@ -134,10 +134,10 @@ public class HomeController {
         return "edit_profile";
     }
     @PostMapping("/updateProfile")
-    public String editProfile(Model model, Authentication authentication, @RequestParam String firstName, @RequestParam String lastName,
-                              @RequestParam String password, HttpSession session, String email, String mobileNumber) throws IOException {
-        org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        email = auth.getName();
+    public String editProfile(Model model, Principal p, @RequestParam String firstName, @RequestParam String lastName,
+                              @RequestParam String password, HttpSession session, String mobileNumber) {
+
+        String email = p.getName();
         UserDtls user = userRepo.findByEmail(email);
 
         boolean f = passwordEncoder.matches(password, user.getPassword());
@@ -149,10 +149,10 @@ public class HomeController {
 
             userRepo.save(user);
             model.addAttribute("user", user);
-            session.setAttribute("msg", "Изменения сохранены.");
+            session.setAttribute("msg", "Changes are saved.");
 
         } else {
-            session.setAttribute("msg", "Неверный пароль.");
+            session.setAttribute("msg", "Wrong password.");
         }
         return "redirect:/editProfile";
     }

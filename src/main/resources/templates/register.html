@@ -24,25 +24,25 @@
                         <form action="createUser" method="post">
                             <div class="mb-3">
                                 <label>Enter First Name</label>
-                                <input type="text" name="firstName" class="form-control">
+                                <input type="text" name="firstName" required pattern="[A-Za-zА-Яа-яёЁ]{2,}" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label>Enter Last Name</label>
-                                <input type="text" name="lastName" class="form-control">
+                                <input type="text" name="lastName" required pattern="[A-Za-zА-Яа-яёЁ]{2,}" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label>Enter Email</label>
-                                <input type="email" name="email" class="form-control">
+                                <input type="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label>Enter Mobile Number</label>
-                                <input type="number" name="mobileNumber" class="form-control">
+                                <input type="tel" name="mobileNumber" required pattern="^\+?\d{12,13}$" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label>Enter Password</label>
-                                <input type="password" name="password" class="form-control">
+                                <input type="password" name="password" required pattern="[A-Za-zА-Яа-яёЁ-0-9]{4,}" class="form-control">
                             </div>
-                            <button class="btn btn-primary col-md-12">Register</button>
+                            <button class="btn btn-dark col-md-12">Register</button>
                         </form>
                         </div>
                     </div>

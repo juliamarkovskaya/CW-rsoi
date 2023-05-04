@@ -1,4 +1,4 @@
-package com.cwrsoi.controller;
+/*package com.cwrsoi.controller;
 
 import com.cwrsoi.model.BookDtls;
 import com.cwrsoi.repository.BookRepository;
@@ -23,5 +23,5 @@ public class BookController {
 
 
 
-}
+}*/
 

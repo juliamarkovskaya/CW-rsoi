@@ -10,4 +10,5 @@ public interface UserService {
 
     public boolean checkEmail(String email);
 
+    public String deleteUser(String email);
 }

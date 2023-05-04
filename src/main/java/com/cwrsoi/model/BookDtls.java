@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class BookDtls {
 
     @Id
-    @GeneratedValue//(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idBook;
 
     @Column(name = "name")
@@ -21,6 +21,9 @@ public class BookDtls {
 
     @Column(name = "price")
     private Double price;
+
+    @Column(name = "quantity")
+    private int quantity;
 
     @Lob
     private byte[] image;
@@ -53,14 +56,21 @@ public class BookDtls {
         return price;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setPrice(Double price) { this.price = price; }
+
+    public int getQuantity() {
+        return quantity;
     }
 
-    public BookDtls(String name, String author, Double price) {
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public BookDtls(String name, String author, Double price, int quantity) {
         this.name = name;
         this.author = author;
         this.price = price;
+        this.quantity = quantity;
     }
 
     public BookDtls() {
@@ -72,7 +82,8 @@ public class BookDtls {
                 "idBook=" + idBook +
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
-                ", price=" + price +
+                ", price=" + price + '\'' +
+                ", quantity=" + quantity +
                 '}';
     }
 

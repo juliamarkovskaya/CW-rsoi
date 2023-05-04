@@ -1,10 +1,12 @@
 package com.cwrsoi.controller;
 
-import com.cwrsoi.model.BookDtls;
 import com.cwrsoi.model.UserDtls;
 import com.cwrsoi.repository.UserRepository;
 import com.cwrsoi.service.BookService;
+import com.cwrsoi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,9 @@ public class UserController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private UserService userService;
 
     @ModelAttribute
     private void userDetails(Model m, Principal p) {
@@ -77,6 +82,32 @@ public class UserController {
        }
 
         return "redirect:/user/changePass";
+    }
+
+    @GetMapping("/deleteUser")
+    public String deleteUser() {
+
+        return "user/delete";
+    }
+
+    @PostMapping("/deleteUserAccount")
+    public String deleteUserAccount(Principal p, @RequestParam String password,
+                                    HttpSession session) {
+        String email = p.getName();
+        UserDtls user = userRepo.findByEmail(email);
+
+        boolean f = passwordEncoder.matches(password, user.getPassword());
+
+        if(f){
+            userService.deleteUser(email);
+            session.setAttribute("msg", user);
+            session.invalidate();
+            System.out.println("User Account " + email + " is DELETED!");
+        } else {
+            session.setAttribute("msg", "Wrong password.");
+        }
+
+        return  "redirect:/";
     }
 
 }

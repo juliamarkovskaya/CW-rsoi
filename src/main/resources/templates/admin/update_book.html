@@ -10,7 +10,7 @@
           crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark btn btn-dark" >
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Book Shop</a>
         <button class="navbar-toggler" type="button"
@@ -67,9 +67,13 @@
                             </div>
                             <div class="mb-3">
                                 <label>Price</label>
-                                <input type="text" name="price" class="form-control" th:value="${book.getPrice}">
+                                <input type="number" name="price" class="form-control" th:value="${book.getPrice}">
                             </div>
-                            <button class="btn btn-primary col-md-12">Confirm</button>
+                            <div class="mb-3">
+                                <label>Quantity</label>
+                                <input type="number" name="quantity" class="form-control" th:value="${book.getQuantity}">
+                            </div>
+                            <button class="btn btn-dark col-md-12">Confirm</button>
                         </form>
                     </div>
                 </div>

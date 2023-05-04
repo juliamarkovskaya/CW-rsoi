@@ -3,33 +3,33 @@
       th:replace="base::Layout(~{::section})">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Book Shop</title>
 
 </head>
 <body>
-<img src="..." class="img-fluid" alt="...">
-<h1>Index Page</h1>
+
     <section>
-        <h1>index</h1>
+
+        <h1 style="margin: 1%">Books</h1>
 
         <div class="row">
             <div class="col-md-6" th:each="book : ${books}">
-                <div class="card mb-3">
+                <div class="card mb-3" style="width: 30rem; margin-left: 10%">
                     <!-- <img th:src="${book.image}" class="card-img-top" alt="..."> -->
                     <div class="card-body">
                         <h3 class="card-title">[[${book.name}]]</h3>
                         <p class="card-text">[[${book.author}]]</p>
-                        <p class="card-text">[[${book.price}]]</p>
+                        <p class="card-text">[[${book.price}]] BYN</p>
 
                         <th:block th:if="${user==NULL}">
                             <ul>
-                                <a href="signin" class="btn btn-primary">Add to bag</a>
+                                <a href="signin" class="btn btn-dark">Add to bag</a>
                             </ul>
                         </th:block>
 
                         <th:block th:if="${user!=NULL}">
                             <ul>
-                                <a th:href="@{/user/bag/{idBook}(idBook=${book.idBook})}" class="btn btn-primary">Add to bag</a>
+                                <a th:href="@{/user/bag/{idBook}(idBook=${book.idBook})}" class="btn btn-dark">Add to bag</a>
                             </ul>
                         </th:block>
 
@@ -37,15 +37,6 @@
                 </div>
             </div>
         </div>
-
-       <!-- <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"></h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div> -->
 
     </section>
 

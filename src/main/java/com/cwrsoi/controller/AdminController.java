@@ -71,6 +71,7 @@ public class AdminController {
         bookDtls.setName(book.getName());
         bookDtls.setAuthor(book.getAuthor());
         bookDtls.setPrice(book.getPrice());
+        bookDtls.setQuantity(book.getQuantity());
 
         bookService.editBook(bookDtls);
 
