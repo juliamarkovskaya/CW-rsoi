@@ -24,6 +24,10 @@ public class UserDtls {
 
     private String mobileNumber;
 
+    public UserDtls() {
+
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -71,4 +75,5 @@ public class UserDtls {
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
+
 }

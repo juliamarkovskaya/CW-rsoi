@@ -29,7 +29,7 @@
 
                         <th:block th:if="${user!=NULL}">
                             <ul>
-                                <a th:href="@{/user/bag/{idBook}(idBook=${book.idBook})}" class="btn btn-dark">Add to bag</a>
+                                <a th:href="@{/user/bag/{id}(id=${user.id})}" class="btn btn-dark">Add to bag</a>
                             </ul>
                         </th:block>
 

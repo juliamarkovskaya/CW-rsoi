@@ -1,6 +1,7 @@
 package com.cwrsoi.service;
 
 import com.cwrsoi.model.UserDtls;
+import org.springframework.security.core.Authentication;
 
 public interface UserService {
 
@@ -11,4 +12,8 @@ public interface UserService {
     public boolean checkEmail(String email);
 
     public String deleteUser(String email);
+
+    public UserDtls getUserById(Integer id);
+    //public UserDtls getCurrentlyLoggedInUser(Authentication authentication)
+
 }

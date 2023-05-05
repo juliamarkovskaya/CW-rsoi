@@ -52,4 +52,9 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    /*@Override
+    public int getUser() {
+        return user.getId();
+    }*/
 }

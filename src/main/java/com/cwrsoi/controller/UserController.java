@@ -1,11 +1,14 @@
 package com.cwrsoi.controller;
 
+import com.cwrsoi.model.Bag;
 import com.cwrsoi.model.UserDtls;
 import com.cwrsoi.repository.UserRepository;
+import com.cwrsoi.service.BagService;
 import com.cwrsoi.service.BookService;
 import com.cwrsoi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user/")
@@ -31,6 +35,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BagService bagService;
+
     @ModelAttribute
     private void userDetails(Model m, Principal p) {
         String email=p.getName();
@@ -47,11 +54,38 @@ public class UserController {
     public String bag() {
         return "user/bag";
     }
-    @GetMapping("/bag/{idBook}")
-    public String addToBag(@PathVariable Integer idBook, Model model) {
-        //BookDtls book = bookService.getBookById()
+
+    @GetMapping("/bag/{id}")
+    public String addToBag(Principal p, @PathVariable Integer id, Model model) {
+
+        String email = p.getName();
+        UserDtls user = userRepo.findByEmail(email);
+        List<Bag> bagItems = bagService.getBagItemsByUser(user);
+        model.addAttribute("bagItems", bagItems);
         return "user/bag";
     }
+
+    /*@GetMapping("/bag")
+    public String bag() {
+        return "user/bag";
+    }
+
+    @GetMapping("/bag/{id}")
+    public String addToBag(@PathVariable Integer id, Model model) {
+        //BookDtls book = bookService.getBookById()
+        return "user/bag";
+    }*/
+
+    /*@GetMapping("/bag/{idBook}")
+    public String addToBag(@PathVariable Integer id, Model m, Principal p, UserDtls user,
+                           @AuthenticationPrincipal Authentication authentication) {
+        //BookDtls book = bookService.getBookById()
+            String email = p.getName();
+            List<Bag> bagItems = bagService.getBagItemsByUser(user);
+
+            m.addAttribute("bagItems", bagItems);
+        return "user/bag";
+    }*/
 
     @GetMapping("/changePass")
     public String loadChangePassword() {
@@ -109,5 +143,7 @@ public class UserController {
 
         return  "redirect:/";
     }
+
+
 
 }

@@ -1,11 +1,17 @@
 package com.cwrsoi.service;
 
+import com.cwrsoi.config.CustomUserDetails;
+import com.cwrsoi.config.UserDetailsServiceImpl;
 import com.cwrsoi.model.UserDtls;
 import com.cwrsoi.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -48,4 +54,32 @@ public class UserServiceImpl implements UserService{
         }
         return "Something wrong";
     }
+
+    public UserDtls getUserById(Integer id) {
+        UserDtls user = userRepo.findById(id).get();
+        return user;
+    }
+
+    /*public UserDtls getCurrentlyLoggedInUser(String email, Principal p) {
+        UserDtls user = userRepo.findByEmail(email);
+        email = p.getName();
+        return user;
+    }*/
+
+
+    /*@Override
+    public UserDtls getCurrentlyLoggedInUser(Authentication authentication) {
+        if (authentication == null) { return null; }
+
+        UserDtls user = null;
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof CustomUserDetails) {
+            user = ((CustomUserDetails) principal).getUsername();
+        } else if (principal instanceof UserDetailsServiceImpl) {
+            String email = ((UserDetailsServiceImpl) principal).getEmail();
+            user = getUserByEmail(email);
+        }
+        return user;
+    }*/
 }
