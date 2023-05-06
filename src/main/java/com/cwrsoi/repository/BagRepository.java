@@ -23,10 +23,10 @@ public interface BagRepository extends JpaRepository<Bag, Integer> {
 
      public Bag findByBookAndUser(BookDtls book, UserDtls user);
 
-     @Query("DELETE FROM Bag  WHERE user.id = ?1 AND book.idBook = ?2")
-     @Transactional
-     @Modifying
-     public Bag deleteByUserAndBook(Integer id, Integer idBook);
+     public Bag getAllByUser(UserDtls user);
+
+     //@Transactional
+     //public Bag deleteAllByUser(UserDtls user);
 
      //public Bag findByUserId(UserDtls id);
 

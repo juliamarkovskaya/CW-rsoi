@@ -14,7 +14,7 @@ public interface BagService {
 
     public List<Bag> getBagItemsByUser(UserDtls user);
 
-    public Bag addItemToBag(Integer idBook, Integer orderQuantity, UserDtls user);
+    public Bag addItemToBag(Integer idBook, /*Integer orderQuantity,*/ UserDtls user);
 
-    public String removeItem(Integer idBag);
+    //public String removeItem(Integer idBag);
 }

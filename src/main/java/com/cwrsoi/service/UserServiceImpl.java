@@ -2,7 +2,9 @@ package com.cwrsoi.service;
 
 import com.cwrsoi.config.CustomUserDetails;
 import com.cwrsoi.config.UserDetailsServiceImpl;
+import com.cwrsoi.model.Bag;
 import com.cwrsoi.model.UserDtls;
+import com.cwrsoi.repository.BagRepository;
 import com.cwrsoi.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -21,6 +24,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private BCryptPasswordEncoder passwordEncode;
+
+    @Autowired
+    private BagRepository bagRepo;
 
     @Override
     public UserDtls createUser(UserDtls user) {
@@ -49,8 +55,18 @@ public class UserServiceImpl implements UserService{
         UserDtls user = userRepo.findByEmail(email);
 
         if(user!=null) {
-            userRepo.delete(user);
-            return "User Delete Successfully";
+            List<Bag> bagItems = bagRepo.findByUser(user);
+            for (Bag bag : bagItems) {
+                bagRepo.delete(bag);
+            }
+            //Bag bagItems = bagRepo.getAllByUser(user);
+            //for(int i= 0; i <bagItems; i++) {
+            //if (bagItems != null) {
+                //bagRepo.delete(bagItems); //}
+            //} else {
+                userRepo.delete(user);
+                return "User Delete Successfully";
+            //}
         }
         return "Something wrong";
     }

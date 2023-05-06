@@ -65,27 +65,27 @@ public class UserController {
         return "user/bag";
     }
 
-    @GetMapping("/bag/{id}/add/{idBook}/{orderQuantity}")
+    @GetMapping("/bag/{id}/add/{idBook}")
     public String AddBookToBag(@PathVariable Integer idBook,
-                                @PathVariable Integer orderQuantity,
+                               //@PathVariable Integer orderQuantity,
                                 @AuthenticationPrincipal Authentication authentication,
                                 Principal p, Model model, HttpSession session, @PathVariable String id) {
         String email = p.getName();
         UserDtls user = userRepo.findByEmail(email);
-        bagService.addItemToBag(idBook, orderQuantity, user);
+        bagService.addItemToBag(idBook, /*orderQuantity,*/ user);
         session.setAttribute("msg", "Item successfully added to bag");
         return "redirect:/";
     }
 
-    @GetMapping("/bag/remove/{idBag}")
+    /*@GetMapping("/bag/remove/{idBag}")
     public String RemoveItemFromBag(@PathVariable Integer idBag,
                                     //@PathVariable Integer id,
-                                    /*Principal p,*/ HttpSession session) {
+                                    /*Principal p,*/ /*HttpSession session) {
 
         bagService.removeItem(idBag);
         session.setAttribute("msg", "Item successfully removed");
         return "redirect:/user/bag";
-    }
+    }*/
 
     @GetMapping("/changePass")
     public String loadChangePassword() {
