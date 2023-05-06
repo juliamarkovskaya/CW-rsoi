@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Book Shop</title>
-    <script th:scr=@{"/js/orderQuantity.js"}></script>
 </head>
 <body>
 
@@ -25,13 +24,46 @@
                         <p class="card-text">[[${book.price}]] BYN</p>
 
                         <th:block th:if="${user==NULL}">
-                            <a th:replace="orderQuantity :: orderQuantity(1, ${book.idBook})">Quantity</a>
+
+                            <!--<label for="orderQuantity" class="col-sm-2 col-form-label">Quantity</label>
+                            <div class="col-sm-4 input-group">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" id="minus-btn0">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </span>
+                                <input type="number" class="form-control" id="orderQuantity0" name="orderQuantity"
+                                       value="1" required>
+                                <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" id="plus-btn0">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </span>
+                            </div> -->
+
                             <a href="signin" class="btn btn-dark" style="margin-top: 2%; margin-left: 70%">Add to bag</a>
                         </th:block>
 
                         <th:block th:if="${user!=NULL}">
-                            <a th:replace="orderQuantity :: orderQuantity(1, ${book.idBook})">Quantity</a>
-                            <a th:href="@{/user/bag/{id}(id=user.id)/add/{idBook}(idBook=${book.idBook})}"
+
+                            <label th:for="orderQuantity" class="col-sm-2 col-form-label">Quantity</label>
+                                <div class="col-sm-4 input-group">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" id="minus-btn">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </span>
+                                    <input type="number" class="form-control text-center" th:id="orderQuantity"
+                                       name="orderQuantity" style="max-width: 55px"
+                                       th:value="1" required />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" id="plus-btn">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </span>
+                            </div>
+
+                            <a th:href="@{/user/bag/{id}(id=${user.id})/add/{idBook}/{orderQuantity}(idBook=${book.idBook},orderQuantity=${orderQuantity})}"
                                class="btn btn-dark"
                                style="margin-top: 2%; margin-left: 70%">Add to bag</a>
                         </th:block>
@@ -40,6 +72,22 @@
             </div>
         </div>
 
+        <script src = "https://code.jquery.com/jquery-3.4.1.slim.min.js"
+                integrity = "sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+                crossOrigin = "anonymous">
+            var minusBtn = document.getElementById("minus-btn");
+            var plusBtn = document. getElementById("plus-btn");
+            var capacityField = document.getElementById("orderQuantity");
+
+            minusBtn.addEventListener("click", function () {
+                if (capacityField. value > 1) {
+                    capacityField.value--;
+                }
+            });
+            plusBtn. addEventListener("click", function () {
+                capacityField.value++;
+            });
+        </script>
 
     </section>
 

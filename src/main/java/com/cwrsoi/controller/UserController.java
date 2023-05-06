@@ -65,53 +65,27 @@ public class UserController {
         return "user/bag";
     }
 
-    @GetMapping("/bag/{id}/add/{idBook}")
+    @GetMapping("/bag/{id}/add/{idBook}/{orderQuantity}")
     public String AddBookToBag(@PathVariable Integer idBook,
+                                @PathVariable Integer orderQuantity,
                                 @AuthenticationPrincipal Authentication authentication,
                                 Principal p, Model model, HttpSession session, @PathVariable String id) {
-        String email = p.getName();
-        UserDtls user = userRepo.findByEmail(email);
-        bagService.addItemToBag(idBook, user);
-        //model.addAttribute("bagItem", bagService.addItemToBag(idBook, orderQuantity, user));
-        session.setAttribute("msg", "Item successfully added to bag");
-        return "redirect:/";
-    }
-
-
-
-    /*@GetMapping("/bag/add/{pid}/{qty}")
-    public String AddBookToBag(@PathVariable("pid") Integer idBook,
-                               @PathVariable("qty") Integer orderQuantity,
-                               @AuthenticationPrincipal Authentication authentication,
-                               Principal p, HttpSession session) {
         String email = p.getName();
         UserDtls user = userRepo.findByEmail(email);
         bagService.addItemToBag(idBook, orderQuantity, user);
         session.setAttribute("msg", "Item successfully added to bag");
         return "redirect:/";
-    }*/
-
-    /*@GetMapping("/bag")
-    public String bag() {
-        return "user/bag";
     }
 
-    @GetMapping("/bag/{id}")
-    public String addToBag(@PathVariable Integer id, Model model) {
-        //BookDtls book = bookService.getBookById()
-        return "user/bag";
-    }*/
+    @GetMapping("/bag/remove/{idBag}")
+    public String RemoveItemFromBag(@PathVariable Integer idBag,
+                                    //@PathVariable Integer id,
+                                    /*Principal p,*/ HttpSession session) {
 
-    /*@GetMapping("/bag/{idBook}")
-    public String addToBag(@PathVariable Integer id, Model m, Principal p, UserDtls user,
-                           @AuthenticationPrincipal Authentication authentication) {
-        //BookDtls book = bookService.getBookById()
-            String email = p.getName();
-            List<Bag> bagItems = bagService.getBagItemsByUser(user);
-
-            m.addAttribute("bagItems", bagItems);
-        return "user/bag";
-    }*/
+        bagService.removeItem(idBag);
+        session.setAttribute("msg", "Item successfully removed");
+        return "redirect:/user/bag";
+    }
 
     @GetMapping("/changePass")
     public String loadChangePassword() {
@@ -165,8 +139,8 @@ public class UserController {
             System.out.println("User Account " + email + " is DELETED!");
         } else {
             session.setAttribute("msg", "Wrong password.");
+            return "user/delete";
         }
-
         return  "redirect:/";
     }
 
