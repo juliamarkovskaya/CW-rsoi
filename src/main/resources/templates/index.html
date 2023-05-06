@@ -4,14 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Book Shop</title>
-
+    <script th:scr=@{"/js/orderQuantity.js"}></script>
 </head>
 <body>
 
     <section>
 
         <h1 style="margin: 1%">Books</h1>
-
+        <th:block th:if="${session.msg}">
+            <p class="text-center fs-4 text-success">[[${session.msg}]]</p>
+            <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+        </th:block>
         <div class="row">
             <div class="col-md-6" th:each="book : ${books}">
                 <div class="card mb-3" style="width: 30rem; margin-left: 10%">
@@ -22,21 +25,21 @@
                         <p class="card-text">[[${book.price}]] BYN</p>
 
                         <th:block th:if="${user==NULL}">
-                            <ul>
-                                <a href="signin" class="btn btn-dark">Add to bag</a>
-                            </ul>
+                            <a th:replace="orderQuantity :: orderQuantity(1, ${book.idBook})">Quantity</a>
+                            <a href="signin" class="btn btn-dark" style="margin-top: 2%; margin-left: 70%">Add to bag</a>
                         </th:block>
 
                         <th:block th:if="${user!=NULL}">
-                            <ul>
-                                <a th:href="@{/user/bag/{id}(id=${user.id})}" class="btn btn-dark">Add to bag</a>
-                            </ul>
+                            <a th:replace="orderQuantity :: orderQuantity(1, ${book.idBook})">Quantity</a>
+                            <a th:href="@{/user/bag/{id}(id=user.id)/add/{idBook}(idBook=${book.idBook})}"
+                               class="btn btn-dark"
+                               style="margin-top: 2%; margin-left: 70%">Add to bag</a>
                         </th:block>
-
                     </div>
                 </div>
             </div>
         </div>
+
 
     </section>
 

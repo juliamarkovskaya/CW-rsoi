@@ -65,6 +65,32 @@ public class UserController {
         return "user/bag";
     }
 
+    @GetMapping("/bag/{id}/add/{idBook}")
+    public String AddBookToBag(@PathVariable Integer idBook,
+                                @AuthenticationPrincipal Authentication authentication,
+                                Principal p, Model model, HttpSession session, @PathVariable String id) {
+        String email = p.getName();
+        UserDtls user = userRepo.findByEmail(email);
+        bagService.addItemToBag(idBook, user);
+        //model.addAttribute("bagItem", bagService.addItemToBag(idBook, orderQuantity, user));
+        session.setAttribute("msg", "Item successfully added to bag");
+        return "redirect:/";
+    }
+
+
+
+    /*@GetMapping("/bag/add/{pid}/{qty}")
+    public String AddBookToBag(@PathVariable("pid") Integer idBook,
+                               @PathVariable("qty") Integer orderQuantity,
+                               @AuthenticationPrincipal Authentication authentication,
+                               Principal p, HttpSession session) {
+        String email = p.getName();
+        UserDtls user = userRepo.findByEmail(email);
+        bagService.addItemToBag(idBook, orderQuantity, user);
+        session.setAttribute("msg", "Item successfully added to bag");
+        return "redirect:/";
+    }*/
+
     /*@GetMapping("/bag")
     public String bag() {
         return "user/bag";

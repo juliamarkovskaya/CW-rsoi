@@ -13,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
 
@@ -51,6 +53,26 @@ public class BagController {
         model.addAttribute("bagItems", bagItems);
         return "user/bag";
     }
+
+    /*@GetMapping("/deleteBook/{idBook}")
+        public String deleteBook(@PathVariable Integer idBook, HttpSession session) {
+            bookService.deleteBook(idBook);
+            session.setAttribute("msg", "Successfully deleted");
+            return "redirect:/admin/books";
+        }*/
+
+    /*@GetMapping("/bag/add/{pid}/{qty}")
+    public String AddBookToBag(@PathVariable("pid") Integer idBook,
+                               @PathVariable("qty") Integer orderQuantity,
+                               @AuthenticationPrincipal Authentication authentication,
+                               Principal p, HttpSession session) {
+        String email = p.getName();
+        UserDtls user = userRepo.findByEmail(email);
+        bagService.addItemToBag(idBook, orderQuantity, user);
+        session.setAttribute("msg", "Item successfully added to bag");
+        return "redirect:/";
+    }*/
+    
 
     /*@GetMapping("bag")
     public String showBag(Model m, Principal p, UserDtls user,

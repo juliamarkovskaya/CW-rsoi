@@ -51,4 +51,9 @@ public class Bag {
     public void setOrderQuantity(int orderQuantity) {
         this.orderQuantity = orderQuantity;
     }
+
+    @Transient
+    public double getSubtotal() {
+        return this.book.getPrice() * orderQuantity;
+    }
 }

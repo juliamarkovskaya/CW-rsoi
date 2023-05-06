@@ -15,7 +15,7 @@ public interface BagRepository extends JpaRepository<Bag, Integer> {
 
     public List<Bag> findByUserId(Integer id);
 
-    //public Bag findByIdBookAndUser(Integer idBook, UserDtls user);
+    public Bag findByBookAndUser(BookDtls book, UserDtls user);
 
     //public Bag findByUserId(UserDtls id);
 
