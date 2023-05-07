@@ -26,14 +26,17 @@
                         <div class="row border rounded" th:with="book = ${bag.book}" style="margin-left: 10%">
                             <div class="col-2">
                                 <div>[[${status.count}]]</div>
-                                <div><a th:href="@{/bag/remove/{idBag}(idBag=${bag.idBag})}">Remove</a></div>
+                                <!--<div><a th:href="@{/bag/remove/{idBag}(idBag=${bag.idBag})}">Remove</a></div>-->
                             </div>
                             <div class="col-6">
                                 <div>
                                     <h3 class="card-title" >[[${bag.book.name}]]</h3>
                                 </div>
+                                <div>
+                                    <h4 class="card-title" >[[${bag.book.author}]]</h4>
+                                </div>
 
-                            <label for="orderQuantity" class="col-sm-2 col-form-label">Quantity</label>
+                            <!-- <label for="orderQuantity" class="col-sm-2 col-form-label">Quantity</label>
                                 <div class="col-sm-4 input-group">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="button" id="minus-btn">
@@ -48,10 +51,10 @@
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </span>
-                                </div>
+                                </div> -->
 
                                 <div>
-                                    <span>X</span>
+                                    <!-- <span>X</span> -->
                                     <span>[[${bag.book.price}]] BYN</span>
                                 </div>
                             </div>
@@ -60,7 +63,7 @@
                     </th:block>
                 </div>
 
-                <div class="col-sm-4" th:unless="${#lists.isEmpty(bagItems)}">
+                <!-- <div class="col-sm-4" th:unless="${#lists.isEmpty(bagItems)}">
                     <div>
                         <span class="h3">Estimated total:</span>
                     </div>
@@ -70,7 +73,7 @@
                     <div class="mt-2">
                         <button class="btn btn-danger">Check Out</button>
                     </div>
-                </div>
+                </div> -->
 
                 <th:block th:if="${#lists.isEmpty(bagItems)}">
                     <h3>Your card is empty</h3>
@@ -81,7 +84,7 @@
         </div>
 
     </section>
-    <script src = "https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    <!-- <script src = "https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity = "sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
             crossOrigin = "anonymous">
                 var minusBtn = document.getElementById("minus-btn");
@@ -96,6 +99,6 @@
             plusBtn. addEventListener("click", function () {
             capacityField.value++;
         });
-    </script>
+    </script> -->
 </body>
 </html>
